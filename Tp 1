@@ -1,0 +1,65 @@
+#include <iostream>
+#include <string>
+
+class CCuenta {
+private:
+    std::string titular;
+    double cantidad;
+
+public:
+    CCuenta() : titular(""), cantidad(0.0) {}
+
+    CCuenta(std::string t, double c) : titular(t), cantidad(c) {}
+    
+    void ingresar(double cantidad) {
+        if (cantidad > 0) {
+            this->cantidad += cantidad;
+        }
+    }
+    
+    void retirar(double cantidad) {
+        if (cantidad > 0) {
+            if (this->cantidad >= cantidad) {
+                this->cantidad -= cantidad;
+            } else {
+                this->cantidad = 0;
+            }
+        }
+    }
+
+    
+    std::string getTitular() const {
+        return titular;
+    }
+
+    double getCantidad() const {
+        return cantidad;
+    }
+    
+    void setTitular(const std::string &t) {
+        titular = t;
+    }
+
+    void setCantidad(double c) {
+        cantidad = c;
+    }
+};
+
+int main() {
+
+    CCuenta cuenta("Juan Perez", 100.0);
+
+    std::cout << "Titular: " << cuenta.getTitular() << std::endl;
+    std::cout << "Cantidad: " << cuenta.getCantidad() << std::endl;
+
+    cuenta.ingresar(50.0);
+    std::cout << "Después de ingresar 50.0, la cantidad es: " << cuenta.getCantidad() << std::endl;
+
+    cuenta.retirar(30.0);
+    std::cout << "Después de retirar 30.0, la cantidad es: " << cuenta.getCantidad() << std::endl;
+
+    cuenta.retirar(200.0);
+    std::cout << "Después de intentar retirar 200.0, la cantidad es: " << cuenta.getCantidad() << std::endl;
+
+    return 0;
+}
